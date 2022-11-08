@@ -5,7 +5,7 @@ const getNotes = require('./notes.js')
 
 const msg = getNotes()
 console.log(msg)
-const greenMSG = chalk.green('Success!')
+const greenMSG = chalk.red.inverse.bold('Success!')
 console.log(greenMSG)
 // console.log(validator.isURL ('saurin'))
 
