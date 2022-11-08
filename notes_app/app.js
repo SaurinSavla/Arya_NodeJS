@@ -1,10 +1,13 @@
-const validator = require('validator')
-const { default: isEmail } = require('validator/lib/isemail.js')
+const chalk = require('chalk')
 const getNotes = require('./notes.js')
+// const validator = require('validator')
+// const { default: isEmail } = require('validator/lib/isemail.js')
+
 const msg = getNotes()
 console.log(msg)
-
-console.log(validator.isURL ('saurin'))
+const greenMSG = chalk.green('Success!')
+console.log(greenMSG)
+// console.log(validator.isURL ('saurin'))
 
 
 //const fs = require('fs')
