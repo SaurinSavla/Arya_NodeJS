@@ -10,8 +10,21 @@ yargs.version('1.1.0')
 yargs.command({
     command : 'add',
     describe : 'Add a new note',
-    handler : function(){
-        console.log('Adding a new note')
+    builder: {
+        title: {
+            describe: 'Note Title' ,
+            demandOption: true,
+            type: 'string'
+        },
+        body: {
+            describe: 'note body',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler : function(argv){
+        console.log('Title: '+argv.title)
+        console.log('Body: '+argv.body)
     }
 })
 
@@ -24,7 +37,7 @@ yargs.command({
     }
 })
 
-//Creating Remove command
+//Creating listing command
 yargs.command({
     command : 'list',
     describe :'Listing all Note',
@@ -33,7 +46,7 @@ yargs.command({
     }
 })
 
-//Creating Remove command
+//Creating Reading command
 yargs.command({
     command : 'read',
     describe :'Reading a Note',
