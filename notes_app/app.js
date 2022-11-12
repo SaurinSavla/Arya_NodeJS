@@ -1,6 +1,6 @@
 const chalk = require('chalk') // helps coloring text
 const yargs = require('yargs') //helps taking input
-const getNotes = require('./notes.js')
+const notes = require('./notes.js')
 //we install many packages because node js doesnt allow too many argument parsing
 
 //Customizing yargs
@@ -23,8 +23,7 @@ yargs.command({
         }
     },
     handler : function(argv){
-        console.log('Title: '+argv.title)
-        console.log('Body: '+argv.body)
+        notes.addNote(argv.title,argv.body)
     }
 })
 
@@ -32,8 +31,15 @@ yargs.command({
 yargs.command({
     command : 'remove',
     describe :'Removing a Note',
-    handler : function(){
-        console.log('Removing a note')
+    builder : {
+        title : {
+            describe : 'Note Title',
+            demandOption : true,
+            type : 'string'
+        }
+    },
+    handler : function(argv){
+        notes.removeNote(argv.title)
     }
 })
 
@@ -55,6 +61,7 @@ yargs.command({
     }
 })
 console.log(yargs.argv)
+
 // if(command === 'add')
 // {
 //     console.log('Adding Note')
