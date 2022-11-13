@@ -1,47 +1,60 @@
 const request = require('request')
+const geocode = require('./utils/geocode.js')
+const forecast = require('./utils/forecast.js')
 
-const url = 'http://api.weatherstack.com/current?access_key=b699effe3fcfc17307a076c48233403c&query=37.8267,-122.4233&units=f' //
-//access_key-my access key, query - coordinates of location, units - to convert units to fahrenheit
-request({ url : url, json : true}, (error,response) => {
+// const url = 'http://api.weatherstack.com/current?access_key=b699effe3fcfc17307a076c48233403c&query=37.8267,-122.4233&units=f' //
+// //access_key-my access key, query - coordinates of location, units - to convert units to fahrenheit
+// request({ url : url, json : true}, (error,response) => {
 
-    if(error){
-        console.log('Unable to connect to weather service.')
-    }
-    else if(response.body.error){
-        console.log('Unable to find location')
-    }
-    else{
-        console.log(response.body.current.weather_descriptions[0] + '. The temperature is ' + response.body.current.temperature +' degrees currently. It feels like '+ response.body.current.feelslike + ' outside')
-    }
-    // const data = JSON.parse(response.body)
-    // console.log(data.current)
+//     if(error){
+//         console.log('Unable to connect to weather service.')
+//     }
+//     else if(response.body.error){
+//         console.log('Unable to find location')
+//     }
+//     else{
+//         console.log(response.body.current.weather_descriptions[0] + '. The temperature is ' + response.body.current.temperature +' degrees currently. It feels like '+ response.body.current.feelslike + ' outside')
+//     }
+//     // const data = JSON.parse(response.body)
+//     // console.log(data.current)
     
-})
+// })
 
 
 
 //GEOCODING
 //Latitudes -> Coordinates -> Weather
 
-const geocodeurl = 'https://us1.locationiq.com/v1/search?key=pk.84bdfe7ee5311a118c26a4dacab7107f&q=Irvine&format=json'
-//using Location IQ
+// const geocodeurl = 'https://us1.locationiq.com/v1/search?key=pk.84bdfe7ee5311a118c26a4dacab7107f&q=Irvine&format=json'
+// //using Location IQ
 
-request({url : geocodeurl , json : true}, (error,response) => {
+// request({url : geocodeurl , json : true}, (error,response) => {
     
-    if(error){
-        console.log('Unable to connect to location services')
-    }
-    else if(response.body.error){
-        console.log('Unable to find Location. Try another search.')
-    }
-    else{
-        const latitude = response.body[0].lat
-        const longitude = response.body[0].lon
-        console.log('Latitude is = ' + latitude + 'Longitude is = ' + longitude)
-    }
+//     if(error){
+//         console.log('Unable to connect to location services')
+//     }
+//     else if(response.body.error){
+//         console.log('Unable to find Location. Try another search.')
+//     }
+//     else{
+//         const latitude = response.body[0].lat
+//         const longitude = response.body[0].lon
+//         console.log('Latitude is = ' + latitude + 'Longitude is = ' + longitude)
+//     }
 
 
     
+// })
+
+
+geocode('Nani Khakhar', (error,data) => {
+    console.log('Error',error)
+    console.log('Data',data)
+})
+
+forecast(22.8788837, 69.5158195, (error, data) => {
+  console.log('Error', error)
+  console.log('Data', data)
 })
 
 
