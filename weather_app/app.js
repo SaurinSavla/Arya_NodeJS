@@ -46,16 +46,28 @@ const forecast = require('./utils/forecast.js')
     
 // })
 
+const address = process.argv[2]
 
-geocode('Nani Khakhar', (error,data) => {
-    console.log('Error',error)
-    console.log('Data',data)
-})
+if(!address){
+  console.log('Please provide an address!')
+}else{
+  geocode(address, (error,data) => {
+    if(error){
+      return console.log(error)
+    }
 
-forecast(22.8788837, 69.5158195, (error, data) => {
-  console.log('Error', error)
-  console.log('Data', data)
+    forecast(data.latitude, data.longitude, (error, foreCastdata) => {
+      if(error){
+        return console.log(error)
+      }
+
+      console.log(data.location)
+      console.log(foreCastdata)
+    })
 })
+}
+
+console.log(process.argv)
 
 
 // Asynchronous Node_jS
